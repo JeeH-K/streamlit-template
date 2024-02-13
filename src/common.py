@@ -17,14 +17,15 @@ def page_setup():
         menu_items=None,
     )
     if "workspace" not in st.session_state:
+        workspace_parent_directory = 'workspaces/'
         # Local: workspace name at startup: default-workspace
         if "local" in sys.argv:
             st.session_state.location = "local"
-            st.session_state["workspace"] = Path("default-workspace")
+            st.session_state["workspace"] = Path(workspace_parent_directory, "default-workspace")
         # Online: create a random key as workspace name
         else:
             st.session_state.location = "online"
-            st.session_state["workspace"] = Path(str(uuid.uuid1()))
+            st.session_state["workspace"] = Path(workspace_parent_directory, str(uuid.uuid1()))
     # Make sure important directories exist
     st.session_state["workspace"].mkdir(parents=True, exist_ok=True)
 
